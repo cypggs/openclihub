@@ -13,10 +13,10 @@ export const translations = {
     // Hero
     "hero.badge": "CLI is the next wave of AI tooling",
     "hero.title.line1": "The CLI Tools",
-    "hero.title.line2": "Directory",
+    "hero.title.line2": " Directory",
     "hero.subtitle":
       "AI is reshaping how we interact with software. CLIs are the bridge between AI agents and the products you use every day. Discover official and community CLI tools for your favorite products.",
-    "hero.cliInstall": "Also available as a CLI:",
+    "hero.cliInstall": "This site is also available as a CLI:",
     "hero.mission":
       "Encouraging companies to build official CLIs and strengthen the AI agent tool ecosystem.",
 
@@ -111,7 +111,7 @@ export const translations = {
     "hero.title.line2": "目录",
     "hero.subtitle":
       "AI 正在重塑人机交互方式。CLI 是 AI Agent 与你日常使用产品之间的桥梁。在这里发现官方和社区开发的 CLI 工具。",
-    "hero.cliInstall": "同时支持命令行使用：",
+    "hero.cliInstall": "本网站同时支持命令行使用：",
     "hero.mission": "推动各公司开发官方 CLI，完善 AI Agent 工具生态。",
 
     // Search & Filter

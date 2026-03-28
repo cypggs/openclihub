@@ -23,9 +23,8 @@ export function Hero() {
           {t("hero.badge")}
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
           {t("hero.title.line1")}
-          <br />
           <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
             {t("hero.title.line2")}
           </span>
