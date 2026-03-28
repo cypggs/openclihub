@@ -35,6 +35,17 @@ export function Hero() {
           {t("hero.subtitle")}
         </p>
 
+        <div className="max-w-md mx-auto mb-4">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-2">
+            {t("hero.cliInstall")}
+          </p>
+          <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-zinc-900 dark:bg-zinc-800 border border-zinc-700">
+            <code className="text-sm text-emerald-400 font-mono">
+              npm install -g openclihub
+            </code>
+          </div>
+        </div>
+
         <p className="max-w-xl mx-auto text-sm text-zinc-500 dark:text-zinc-500">
           {t("hero.mission")}
         </p>
