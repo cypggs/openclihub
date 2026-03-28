@@ -97,6 +97,7 @@ export async function POST(request: NextRequest) {
             "primary_language",
             "category",
             "install_command",
+            "agent_install_command",
             "icon_url",
             "stars",
           ],
@@ -110,6 +111,7 @@ export async function POST(request: NextRequest) {
             category: "Productivity",
             homepage_url: "https://notion.so",
             install_command: "npm install -g @notion/cli",
+            agent_install_command: "Read and install from https://github.com/notion/cli/blob/main/README.md",
           },
         },
         { status: 400 }
@@ -173,6 +175,7 @@ export async function POST(request: NextRequest) {
         stars: body.stars || 0,
         category: body.category || null,
         install_command: body.install_command || null,
+        agent_install_command: body.agent_install_command || null,
       })
       .select()
       .single();

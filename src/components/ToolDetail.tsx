@@ -103,6 +103,21 @@ export function ToolDetail({ tool }: { tool: CliTool }) {
         </div>
       )}
 
+      {/* Agent install command */}
+      {tool.agent_install_command && (
+        <div className="mb-8">
+          <h2 className="text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-2">
+            {t("detail.agentInstallCommand")}
+          </h2>
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-zinc-950 dark:bg-zinc-900 border border-zinc-800">
+            <code className="flex-1 text-sm text-blue-400 font-mono overflow-x-auto whitespace-pre-wrap break-all">
+              {tool.agent_install_command}
+            </code>
+            <CopyButton text={tool.agent_install_command} />
+          </div>
+        </div>
+      )}
+
       {/* Info grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
         {tool.github_url && tool.stars > 0 && (

@@ -35,6 +35,7 @@ export const translations = {
     // Tool Detail
     "detail.backToList": "Back to all tools",
     "detail.installCommand": "Install",
+    "detail.agentInstallCommand": "Agent Install",
     "detail.copied": "Copied!",
     "detail.copy": "Copy",
     "detail.github": "View on GitHub",
@@ -88,6 +89,8 @@ export const translations = {
     "submit.homepageUrlPlaceholder": "https://example.com",
     "submit.installCommand": "Install Command (optional)",
     "submit.installCommandPlaceholder": "e.g. npm install -g @org/cli",
+    "submit.agentInstallCommand": "Agent Install Command (optional)",
+    "submit.agentInstallCommandPlaceholder": "e.g. Read and install from https://github.com/org/repo/blob/main/README.md",
     "submit.button": "Submit Tool",
     "submit.submitting": "Submitting...",
     "submit.success": "Tool submitted successfully!",
@@ -124,6 +127,7 @@ export const translations = {
     // Tool Detail
     "detail.backToList": "返回列表",
     "detail.installCommand": "安装命令",
+    "detail.agentInstallCommand": "Agent 安装方式",
     "detail.copied": "已复制！",
     "detail.copy": "复制",
     "detail.github": "在 GitHub 查看",
@@ -174,6 +178,8 @@ export const translations = {
     "submit.homepageUrlPlaceholder": "https://example.com",
     "submit.installCommand": "安装命令（可选）",
     "submit.installCommandPlaceholder": "例如 npm install -g @org/cli",
+    "submit.agentInstallCommand": "Agent 安装命令（可选）",
+    "submit.agentInstallCommandPlaceholder": "例如 查看内容并安装这个项目到本机 https://github.com/org/repo/blob/main/README.md",
     "submit.button": "提交工具",
     "submit.submitting": "提交中...",
     "submit.success": "工具提交成功！",

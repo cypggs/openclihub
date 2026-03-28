@@ -13,6 +13,7 @@ interface FormData {
   category: string;
   homepage_url: string;
   install_command: string;
+  agent_install_command: string;
 }
 
 const initialForm: FormData = {
@@ -25,6 +26,7 @@ const initialForm: FormData = {
   category: "",
   homepage_url: "",
   install_command: "",
+  agent_install_command: "",
 };
 
 export function SubmitForm() {
@@ -253,6 +255,17 @@ export function SubmitForm() {
               onChange={(e) => update("install_command", e.target.value)}
               placeholder={t("submit.installCommandPlaceholder")}
               className="input-field font-mono"
+            />
+          </Field>
+
+          {/* Agent install command */}
+          <Field label={t("submit.agentInstallCommand")}>
+            <input
+              type="text"
+              value={form.agent_install_command}
+              onChange={(e) => update("agent_install_command", e.target.value)}
+              placeholder={t("submit.agentInstallCommandPlaceholder")}
+              className="input-field"
             />
           </Field>
 
