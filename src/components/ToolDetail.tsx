@@ -111,9 +111,9 @@ export function ToolDetail({ tool }: { tool: CliTool }) {
           </h2>
           <div className="flex items-center gap-2 p-3 rounded-lg bg-zinc-950 dark:bg-zinc-900 border border-zinc-800">
             <code className="flex-1 text-sm text-blue-400 font-mono overflow-x-auto whitespace-pre-wrap break-all">
-              {tool.agent_install_command}
+              {t("detail.agentInstallPrefix")} {tool.agent_install_command}
             </code>
-            <CopyButton text={tool.agent_install_command} />
+            <CopyButton text={`${t("detail.agentInstallPrefix")} ${tool.agent_install_command}`} />
           </div>
         </div>
       )}
