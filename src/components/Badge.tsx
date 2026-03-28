@@ -1,6 +1,10 @@
+"use client";
+
+import { useI18n } from "@/lib/i18n";
+
 interface BadgeProps {
   variant: "official" | "community" | "language" | "category";
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const variantStyles = {
@@ -15,6 +19,17 @@ const variantStyles = {
 };
 
 export function Badge({ variant, children }: BadgeProps) {
+  const { t } = useI18n();
+
+  // Auto-translate for official/community if no children provided
+  const content =
+    children ??
+    (variant === "official"
+      ? t("tool.officialBadge")
+      : variant === "community"
+        ? t("tool.communityBadge")
+        : "");
+
   return (
     <span
       className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full border ${variantStyles[variant]}`}
@@ -28,7 +43,7 @@ export function Badge({ variant, children }: BadgeProps) {
           />
         </svg>
       )}
-      {children}
+      {content}
     </span>
   );
 }

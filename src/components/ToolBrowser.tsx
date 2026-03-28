@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { CliTool } from "@/lib/types";
+import { useI18n } from "@/lib/i18n";
 import { SearchBar } from "./SearchBar";
 import { FilterBar, FilterType } from "./FilterBar";
 import { ToolCard } from "./ToolCard";
@@ -9,16 +10,15 @@ import { ToolCard } from "./ToolCard";
 export function ToolBrowser({ tools }: { tools: CliTool[] }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
+  const { t } = useI18n();
 
   const filtered = useMemo(() => {
     let result = tools;
 
-    // Filter by maintainer type
     if (filter !== "all") {
       result = result.filter((t) => t.maintainer_type === filter);
     }
 
-    // Filter by search query
     if (search.trim()) {
       const q = search.toLowerCase();
       result = result.filter(
@@ -54,7 +54,7 @@ export function ToolBrowser({ tools }: { tools: CliTool[] }) {
         <div className="text-center py-16">
           <div className="text-4xl mb-3">:/</div>
           <p className="text-zinc-500 dark:text-zinc-400">
-            No CLI tools found matching your search.
+            {t("empty.description")}
           </p>
           <button
             onClick={() => {
@@ -63,7 +63,7 @@ export function ToolBrowser({ tools }: { tools: CliTool[] }) {
             }}
             className="mt-3 text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400"
           >
-            Clear filters
+            {t("empty.clearFilters")}
           </button>
         </div>
       ) : (

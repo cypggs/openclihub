@@ -1,5 +1,8 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { TranslationKey } from "@/lib/i18n";
+
 export type FilterType = "all" | "official" | "community";
 
 interface FilterBarProps {
@@ -8,13 +11,15 @@ interface FilterBarProps {
   counts: { all: number; official: number; community: number };
 }
 
-const filters: { value: FilterType; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "official", label: "Official" },
-  { value: "community", label: "Community" },
+const filters: { value: FilterType; labelKey: TranslationKey }[] = [
+  { value: "all", labelKey: "filter.all" },
+  { value: "official", labelKey: "filter.official" },
+  { value: "community", labelKey: "filter.community" },
 ];
 
 export function FilterBar({ active, onChange, counts }: FilterBarProps) {
+  const { t } = useI18n();
+
   return (
     <div className="flex items-center justify-center gap-2">
       {filters.map((f) => (
@@ -27,7 +32,7 @@ export function FilterBar({ active, onChange, counts }: FilterBarProps) {
               : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
           }`}
         >
-          {f.label}
+          {t(f.labelKey)}
           <span className="ml-1.5 text-xs opacity-60">
             {counts[f.value]}
           </span>

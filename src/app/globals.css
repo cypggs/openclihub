@@ -44,3 +44,34 @@ body {
 .search-glow:focus {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
 }
+
+/* Form input fields */
+.input-field {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-zinc-200, #e4e4e7);
+  background: white;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-field:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+.input-field::placeholder {
+  color: #a1a1aa;
+}
+.dark .input-field {
+  background: #18181b;
+  border-color: #3f3f46;
+}
+.dark .input-field:focus {
+  border-color: #6366f1;
+}
+.dark .input-field::placeholder {
+  color: #52525b;
+}

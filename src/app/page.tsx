@@ -1,9 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { CliTool } from "@/lib/types";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { ToolBrowser } from "@/components/ToolBrowser";
-import { Footer } from "@/components/Footer";
+import { HomePage } from "@/components/HomePage";
 
 export const revalidate = 3600;
 
@@ -21,17 +18,8 @@ async function getTools(): Promise<CliTool[]> {
   return data as CliTool[];
 }
 
-export default async function Home() {
+export default async function Page() {
   const tools = await getTools();
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <ToolBrowser tools={tools} />
-      </main>
-      <Footer />
-    </div>
-  );
+  return <HomePage tools={tools} />;
 }

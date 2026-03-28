@@ -1,6 +1,10 @@
-import { CliTool } from "@/lib/types";
-import { Badge } from "./Badge";
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
+import { CliTool } from "@/lib/types";
+import { formatStars } from "@/lib/utils";
+import { Badge } from "./Badge";
 
 function StarIcon() {
   return (
@@ -10,23 +14,13 @@ function StarIcon() {
   );
 }
 
-function formatStars(stars: number): string {
-  if (stars >= 1000) {
-    return (stars / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-  }
-  return stars.toString();
-}
-
 export function ToolCard({ tool }: { tool: CliTool }) {
   return (
-    <a
-      href={tool.github_url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/tool/${tool.slug}`}
       className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg dark:hover:shadow-zinc-900/50 hover:-translate-y-0.5 transition-all duration-200"
     >
       <div className="flex items-start gap-4">
-        {/* Icon */}
         <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden">
           {tool.icon_url ? (
             <Image
@@ -43,7 +37,6 @@ export function ToolCard({ tool }: { tool: CliTool }) {
           )}
         </div>
 
-        {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
             <h3 className="font-semibold text-zinc-900 dark:text-white group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors truncate">
@@ -51,13 +44,8 @@ export function ToolCard({ tool }: { tool: CliTool }) {
             </h3>
           </div>
 
-          {/* Badges */}
           <div className="flex flex-wrap gap-1.5 mb-3">
-            <Badge
-              variant={tool.maintainer_type === "official" ? "official" : "community"}
-            >
-              {tool.maintainer_type === "official" ? "Official" : "Community"}
-            </Badge>
+            <Badge variant={tool.maintainer_type} />
             {tool.primary_language && (
               <Badge variant="language">{tool.primary_language}</Badge>
             )}
@@ -66,12 +54,10 @@ export function ToolCard({ tool }: { tool: CliTool }) {
             )}
           </div>
 
-          {/* Description */}
           <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 mb-3">
             {tool.description}
           </p>
 
-          {/* Footer */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400">
               <StarIcon />
@@ -87,6 +73,6 @@ export function ToolCard({ tool }: { tool: CliTool }) {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
