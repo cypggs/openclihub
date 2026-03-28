@@ -153,13 +153,12 @@ export function SubmitForm() {
           </Field>
 
           {/* GitHub URL */}
-          <Field label={t("submit.githubUrl")} required>
+          <Field label={t("submit.githubUrl")}>
             <input
               type="url"
               value={form.github_url}
               onChange={(e) => update("github_url", e.target.value)}
               placeholder={t("submit.githubUrlPlaceholder")}
-              required
               className="input-field"
             />
           </Field>

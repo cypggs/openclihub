@@ -39,6 +39,16 @@ export async function GET(request: NextRequest) {
   }[] = [];
 
   for (const tool of tools) {
+    // Skip tools without GitHub URLs
+    if (!tool.github_url) {
+      results.push({
+        slug: tool.slug,
+        stars: tool.stars,
+        previous: tool.stars,
+      });
+      continue;
+    }
+
     const match = tool.github_url.match(/github\.com\/([^/]+\/[^/]+)/);
     const repoPath = match ? match[1].replace(/\.git$/, "") : null;
 

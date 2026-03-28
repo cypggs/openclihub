@@ -3,7 +3,7 @@ export interface CliTool {
   slug: string;
   name: string;
   description: string | null;
-  github_url: string;
+  github_url: string | null;
   homepage_url: string | null;
   icon_url: string | null;
   maintainer_type: 'official' | 'community';

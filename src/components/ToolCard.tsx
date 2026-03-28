@@ -59,12 +59,16 @@ export function ToolCard({ tool }: { tool: CliTool }) {
           </p>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400">
-              <StarIcon />
-              <span className="text-sm font-medium">
-                {formatStars(tool.stars)}
-              </span>
-            </div>
+            {tool.github_url && tool.stars > 0 ? (
+              <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400">
+                <StarIcon />
+                <span className="text-sm font-medium">
+                  {formatStars(tool.stars)}
+                </span>
+              </div>
+            ) : (
+              <div />
+            )}
             {tool.maintainer_name && (
               <span className="text-xs text-zinc-400 dark:text-zinc-500">
                 by {tool.maintainer_name}

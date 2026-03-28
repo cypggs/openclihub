@@ -40,6 +40,16 @@ export async function POST(request: NextRequest) {
 
   // Fetch stars from GitHub API for each tool
   for (const tool of tools) {
+    // Skip tools without GitHub URLs
+    if (!tool.github_url) {
+      results.push({
+        slug: tool.slug,
+        stars: tool.stars,
+        previous: tool.stars,
+      });
+      continue;
+    }
+
     const repoPath = extractRepoPath(tool.github_url);
     if (!repoPath) {
       results.push({

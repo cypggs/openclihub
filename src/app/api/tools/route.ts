@@ -83,11 +83,23 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Validate required fields
-    const { name, github_url, maintainer_type } = body;
-    if (!name || !github_url || !maintainer_type) {
+    const { name, github_url, maintainer_type, homepage_url } = body;
+    if (!name || !maintainer_type) {
       return NextResponse.json(
         {
-          error: "Missing required fields: name, github_url, maintainer_type",
+          error: "Missing required fields: name, maintainer_type",
+          required: ["name", "maintainer_type"],
+          optional: [
+            "github_url",
+            "homepage_url",
+            "description",
+            "maintainer_name",
+            "primary_language",
+            "category",
+            "install_command",
+            "icon_url",
+            "stars",
+          ],
           example: {
             name: "Notion CLI",
             github_url: "https://github.com/notion/cli",
@@ -104,6 +116,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Must have at least one link
+    if (!github_url && !homepage_url) {
+      return NextResponse.json(
+        { error: "At least one of github_url or homepage_url is required" },
+        { status: 400 }
+      );
+    }
+
     // Validate maintainer_type
     if (!["official", "community"].includes(maintainer_type)) {
       return NextResponse.json(
@@ -112,8 +132,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate github_url format
-    if (!github_url.startsWith("https://github.com/")) {
+    // Validate github_url format if provided
+    if (github_url && !github_url.startsWith("https://github.com/")) {
       return NextResponse.json(
         { error: "github_url must start with https://github.com/" },
         { status: 400 }
@@ -144,8 +164,8 @@ export async function POST(request: NextRequest) {
         slug,
         name,
         description: body.description || null,
-        github_url,
-        homepage_url: body.homepage_url || null,
+        github_url: github_url || null,
+        homepage_url: homepage_url || null,
         icon_url: body.icon_url || null,
         maintainer_type,
         maintainer_name: body.maintainer_name || null,
