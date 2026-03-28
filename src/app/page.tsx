@@ -8,7 +8,7 @@ async function getTools(): Promise<CliTool[]> {
   const { data, error } = await supabase
     .from("cli_tools")
     .select("*")
-    .order("sort_order", { ascending: true, nullsFirst: false })
+    .order("sort_order", { ascending: true })
     .order("stars", { ascending: false });
 
   if (error) {
