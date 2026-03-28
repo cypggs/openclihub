@@ -65,7 +65,10 @@ export const translations = {
       "Know a CLI tool that should be listed here? Submit it via our API or fill in the form below.",
     "submit.apiTitle": "API Endpoint",
     "submit.apiDesc":
-      "AI agents and scripts can submit tools directly via the API:",
+      "AI agents and scripts can submit tools directly via the API (requires API key):",
+    "submit.apiKey": "API Key",
+    "submit.apiKeyPlaceholder": "Enter your API key",
+    "submit.apiKeyRequired": "API key is required to submit tools",
     "submit.formTitle": "Or fill in the form",
     "submit.name": "Tool Name",
     "submit.namePlaceholder": "e.g. Notion CLI",
@@ -149,7 +152,10 @@ export const translations = {
     "submit.subtitle":
       "知道一个应该被收录的 CLI 工具？通过 API 提交或填写下面的表单。",
     "submit.apiTitle": "API 接口",
-    "submit.apiDesc": "AI Agent 和脚本可以直接通过 API 提交工具：",
+    "submit.apiDesc": "AI Agent 和脚本可以直接通过 API 提交工具（需要 API Key）：",
+    "submit.apiKey": "API Key",
+    "submit.apiKeyPlaceholder": "输入你的 API Key",
+    "submit.apiKeyRequired": "提交工具需要 API Key",
     "submit.formTitle": "或填写表单",
     "submit.name": "工具名称",
     "submit.namePlaceholder": "例如 Notion CLI",

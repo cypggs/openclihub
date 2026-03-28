@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { supabaseServer } from "@/lib/supabase-server";
+import { requireAuth } from "@/lib/auth";
 
 /**
  * GET /api/tools/:slug
- * Get a single CLI tool by slug.
+ * Get a single CLI tool by slug (public, no auth required).
  */
 export async function GET(
   _request: NextRequest,
@@ -29,12 +31,16 @@ export async function GET(
 
 /**
  * PATCH /api/tools/:slug
- * Update a CLI tool. Accepts partial updates.
+ * Update a CLI tool. Requires API key. Accepts partial updates.
  */
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  // Auth check
+  const authError = requireAuth(request);
+  if (authError) return authError;
+
   const { slug } = await params;
 
   try {
@@ -94,6 +100,10 @@ export async function PATCH(
       );
     }
 
+    // Revalidate pages
+    revalidatePath("/");
+    revalidatePath(`/tool/${slug}`);
+
     return NextResponse.json({ data });
   } catch {
     return NextResponse.json(
@@ -105,12 +115,16 @@ export async function PATCH(
 
 /**
  * DELETE /api/tools/:slug
- * Delete a CLI tool.
+ * Delete a CLI tool. Requires API key.
  */
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  // Auth check
+  const authError = requireAuth(request);
+  if (authError) return authError;
+
   const { slug } = await params;
 
   const { error } = await supabaseServer
@@ -121,6 +135,9 @@ export async function DELETE(
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  // Revalidate homepage
+  revalidatePath("/");
 
   return NextResponse.json({ success: true });
 }

@@ -30,6 +30,7 @@ const initialForm: FormData = {
 export function SubmitForm() {
   const { t } = useI18n();
   const [form, setForm] = useState<FormData>(initialForm);
+  const [apiKey, setApiKey] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -39,13 +40,21 @@ export function SubmitForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!apiKey.trim()) {
+      setErrorMsg(t("submit.apiKeyRequired"));
+      setStatus("error");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
 
     try {
       const res = await fetch("/api/tools", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
         body: JSON.stringify(form),
       });
 
@@ -64,6 +73,7 @@ export function SubmitForm() {
   };
 
   const apiExample = `curl -X POST ${typeof window !== "undefined" ? window.location.origin : "https://openclihub.vercel.app"}/api/tools \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "name": "Notion CLI",
@@ -118,6 +128,18 @@ export function SubmitForm() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* API Key */}
+          <Field label={t("submit.apiKey")} required>
+            <input
+              type="password"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              placeholder={t("submit.apiKeyPlaceholder")}
+              required
+              className="input-field font-mono"
+            />
+          </Field>
+
           {/* Name */}
           <Field label={t("submit.name")} required>
             <input

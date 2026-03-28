@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { supabaseServer } from "@/lib/supabase-server";
+import { requireAuth } from "@/lib/auth";
 import { slugify } from "@/lib/utils";
 
 /**
  * GET /api/tools
- * List all CLI tools. Supports query params:
+ * List all CLI tools (public, no auth required).
+ * Query params:
  *   ?type=official|community  - filter by maintainer type
  *   ?category=Productivity    - filter by category
  *   ?q=search                 - search by name/description
@@ -53,23 +56,29 @@ export async function GET(request: NextRequest) {
 
 /**
  * POST /api/tools
- * Submit a new CLI tool. Required fields: name, github_url, maintainer_type.
+ * Submit a new CLI tool. Requires API key in Authorization header.
  *
- * Example request body:
- * {
- *   "name": "Notion CLI",
- *   "github_url": "https://github.com/notion/cli",
- *   "description": "Official CLI for Notion",
- *   "maintainer_type": "official",
- *   "maintainer_name": "Notion",
- *   "primary_language": "TypeScript",
- *   "category": "Productivity",
- *   "homepage_url": "https://notion.so",
- *   "install_command": "npm install -g @notion/cli",
- *   "icon_url": "/icons/notion.svg"
- * }
+ * Example:
+ *   curl -X POST https://openclihub.vercel.app/api/tools \
+ *     -H "Authorization: Bearer YOUR_API_KEY" \
+ *     -H "Content-Type: application/json" \
+ *     -d '{
+ *       "name": "Notion CLI",
+ *       "github_url": "https://github.com/notion/cli",
+ *       "description": "Official CLI for Notion",
+ *       "maintainer_type": "official",
+ *       "maintainer_name": "Notion",
+ *       "primary_language": "TypeScript",
+ *       "category": "Productivity",
+ *       "homepage_url": "https://notion.so",
+ *       "install_command": "npm install -g @notion/cli"
+ *     }'
  */
 export async function POST(request: NextRequest) {
+  // Auth check
+  const authError = requireAuth(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
 
@@ -151,6 +160,9 @@ export async function POST(request: NextRequest) {
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+
+    // Revalidate homepage so new tool appears immediately
+    revalidatePath("/");
 
     return NextResponse.json({ data }, { status: 201 });
   } catch {
