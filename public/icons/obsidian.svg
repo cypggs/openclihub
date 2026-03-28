@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="obsidian-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6C31E3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="24" r="22" fill="url(#obsidian-grad)"/>
+  <path fill="#fff" d="M18,10l12,4l4,12l-6,12l-12-2l-4-14z" opacity="0.9"/>
+  <path fill="#6C31E3" d="M18,10l6,14l-8,12l-4-14z" opacity="0.5"/>
+  <path fill="#6C31E3" d="M24,24l10,2l-6,12l-10-2z" opacity="0.3"/>
+</svg>
