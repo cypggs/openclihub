@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS cli_tools (
   category text,
   install_command text,
   agent_install_command text,
+  sort_order integer,
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now()
 );

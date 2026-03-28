@@ -60,6 +60,7 @@ export async function PATCH(
       "category",
       "install_command",
       "agent_install_command",
+      "sort_order",
     ];
 
     const updates: Record<string, unknown> = {};

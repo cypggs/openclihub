@@ -13,6 +13,7 @@ export interface CliTool {
   category: string | null;
   install_command: string | null;
   agent_install_command: string | null;
+  sort_order: number | null;
   created_at: string;
   updated_at: string;
 }
